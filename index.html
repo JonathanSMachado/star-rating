@@ -7,9 +7,14 @@
     <title>star-rating</title>
 
     <style>
+      :root {
+        --gold: gold;
+        --black: black;
+        --fill: var(--gold);
+      }
+
       .rating {
         --dir: right;
-        --fill: gold;
         --fillbg: rgba(100, 100, 100, 0.15);
         --star: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.25l-6.188 3.75 1.641-7.031-5.438-4.734 7.172-0.609 2.813-6.609 2.813 6.609 7.172 0.609-5.438 4.734 1.641 7.031z"/></svg>');
         --stars: 5;
@@ -69,29 +74,15 @@
         margin-block-end: 1rem;
       }
 
-      .rating--nojs::-moz-range-track {
-        background: var(--fillbg);
-      }
-
-      .rating--nojs::-moz-range-progress {
-        background: var(--fill);
-        block-size: 100%;
-        mask: repeat left center/var(--starsize) var(--star);
-      }
-
-      .rating--nojs::-webkit-slider-runnable-track {
-        background: var(--fillbg);
-      }
-
-      .rating--nojs::-webkit-slider-thumb {
-        background-color: var(--fill);
-        box-shadow: calc(0rem - var(--w)) 0 0 var(--w) var(--fill);
-        opacity: 1;
-        width: 1px;
+      body.dark {
+        --fill: var(--black);
       }
     </style>
   </head>
   <body>
+    <label for="dark-mode">Dark Mode</label>
+    <input type="checkbox" name="dark-mode" id="dark-mode" />
+
     <label class="rating-label">
       <strong>Rating</strong>
       <input
@@ -104,5 +95,17 @@
         style="--value: 2.5"
       />
     </label>
+
+    <script>
+      const toggle = document.querySelector("#dark-mode");
+      toggle.addEventListener("change", () => {
+        const body = document.querySelector("body");
+        if (body.className) {
+          body.className = "";
+        } else {
+          body.className = "dark";
+        }
+      });
+    </script>
   </body>
 </html>
