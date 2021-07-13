@@ -74,7 +74,7 @@
         margin-block-end: 1rem;
       }
 
-      body.dark {
+      .rating.dark-mode {
         --fill: var(--black);
       }
     </style>
@@ -99,12 +99,8 @@
     <script>
       const toggle = document.querySelector("#dark-mode");
       toggle.addEventListener("change", () => {
-        const body = document.querySelector("body");
-        if (body.className) {
-          body.className = "";
-        } else {
-          body.className = "dark";
-        }
+        const rating = document.querySelector(".rating");
+        rating.classList.toggle("dark-mode");
       });
     </script>
   </body>
